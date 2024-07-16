@@ -2,5 +2,6 @@
 
 {% block basic_fields_url %}
 {{ super() }}
+<h1>Test Custom Field</h1>
   {{ form.input('resource_report_id_text', label=_('Custom Text'), id='field-resource_report_id_text', placeholder=_('Report ID'), value=data.resource_report_id_text, error=errors.resource_report_id_text, classes=['control-medium']) }}
 {% endblock %}
