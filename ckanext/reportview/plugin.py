@@ -14,7 +14,7 @@ import ckan.plugins.toolkit as tk
 # )
 
 class ReportviewPlugin(p.SingletonPlugin, tk.DefaultDatasetForm):
-    p.implements(p.IDatasetForm, inherit=True)
+    p.implements(p.IDatasetForm)
     def _modify_package_schema(self, schema: Schema) -> Schema:
         schema.update({
             'resource_report_id': [tk.get_validator('ignore_missing'),
@@ -38,7 +38,15 @@ class ReportviewPlugin(p.SingletonPlugin, tk.DefaultDatasetForm):
             ReportviewPlugin, self).show_package_schema()
         schema = self._modify_package_schema(schema)
         return schema
+    def is_fallback(self):
+        # Return True to register this plugin as the default handler for
+        # package types not handled by any other IDatasetForm plugin.
+        return True
 
+    def package_types(self) -> list[str]:
+        # This plugin doesn't handle any special package types, it just
+        # registers itself as the default (above).
+        return []
     # IConfigurer
 
     def update_config(self, config: CKANConfig):
