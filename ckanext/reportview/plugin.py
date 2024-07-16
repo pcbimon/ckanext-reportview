@@ -14,7 +14,7 @@ import ckan.plugins.toolkit as tk
 # )
 
 class ReportviewPlugin(p.SingletonPlugin, tk.DefaultDatasetForm):
-    p.implements(p.IDatasetForm)
+    p.implements(p.IDatasetForm, inherit=True)
     def _modify_package_schema(self, schema: Schema) -> Schema:
         schema.update({
             'resource_report_id': [tk.get_validator('ignore_missing'),
