@@ -38,6 +38,9 @@ class ReportviewPlugin(p.SingletonPlugin, tk.DefaultDatasetForm):
         schema: Schema = super(
             ReportviewPlugin, self).show_package_schema()
         schema = self._modify_package_schema(schema)
+        cast(Schema, schema['resources']).update({
+                'custom_resource_text' : [ tk.get_validator('ignore_missing') ]
+            })
         return schema
     def is_fallback(self):
         # Return True to register this plugin as the default handler for
