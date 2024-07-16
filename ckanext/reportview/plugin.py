@@ -21,6 +21,9 @@ class ReportviewPlugin(p.SingletonPlugin, tk.DefaultDatasetForm):
         cast(Schema, schema['resources']).update({
                 'resource_report_id_text' : [ tk.get_validator('ignore_missing') ]
                 })
+        cast(Schema, schema['resources']).update({
+                'custom_resource_text' : [ tk.get_validator('ignore_missing') ]
+                })
         return schema
 
     def create_package_schema(self):
@@ -38,6 +41,9 @@ class ReportviewPlugin(p.SingletonPlugin, tk.DefaultDatasetForm):
         schema: Schema = super(
             ReportviewPlugin, self).show_package_schema()
         schema = self._modify_package_schema(schema)
+        cast(Schema, schema['resources']).update({
+                'custom_resource_text' : [ tk.get_validator('ignore_missing') ]
+            })
         cast(Schema, schema['resources']).update({
                 'custom_resource_text' : [ tk.get_validator('ignore_missing') ]
             })
