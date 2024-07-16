@@ -1,0 +1,14 @@
+# reportview-js:
+#   filter: rjsmin
+#   output: ckanext-reportview/%(version)s-reportview.js
+#   contents:
+#     - js/reportview.js
+#   extra:
+#     preload:
+#       - base/main
+
+# reportview-css:
+#   filter: cssrewrite
+#   output: ckanext-reportview/%(version)s-reportview.css
+#   contents:
+#     - css/reportview.css
