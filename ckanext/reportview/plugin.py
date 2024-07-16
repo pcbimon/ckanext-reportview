@@ -15,7 +15,7 @@ import ckan.plugins.toolkit as tk
 # )
 
 class ReportviewPlugin(p.SingletonPlugin, tk.DefaultDatasetForm):
-    p.implements(p.ITranslation)
+    p.implements(p.ITranslation,inherit=True)
     p.implements(p.IConfigurer)
     p.implements(p.IDatasetForm)
     def _modify_package_schema(self, schema: Schema) -> Schema:
