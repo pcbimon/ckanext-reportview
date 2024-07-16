@@ -1,0 +1,29 @@
+# Thai translations for ckanext-reportview.
+# Copyright (C) 2024 ORGANIZATION
+# This file is distributed under the same license as the ckanext-reportview
+# project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ckanext-reportview 0.0.1\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2024-07-16 16:54+0700\n"
+"PO-Revision-Date: 2024-07-16 16:55+0700\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: th\n"
+"Language-Team: th <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.15.0\n"
+
+#: ckanext/reportview/templates/package/snippets/resource_form.html:5
+msgid "Report ID"
+msgstr "Dashboard"
+
+#: ckanext/reportview/templates/package/snippets/resource_form.html:5
+msgid "input report id"
+msgstr "กรุณากรอกรหัสของ Dashbaord"
+
