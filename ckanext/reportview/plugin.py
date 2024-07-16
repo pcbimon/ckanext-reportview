@@ -1,5 +1,9 @@
-import ckan.plugins as plugins
-import ckan.plugins.toolkit as toolkit
+from __future__ import annotations
+
+from ckan.common import CKANConfig
+from ckan.types import Schema
+import ckan.plugins as p
+import ckan.plugins.toolkit as tk
 
 
 # import ckanext.reportview.cli as cli
@@ -9,24 +13,38 @@ import ckan.plugins.toolkit as toolkit
 #     action, auth, validators
 # )
 
+class ReportviewPlugin(p.SingletonPlugin, tk.DefaultDatasetForm):
+    p.implements(p.IDatasetForm)
+    def _modify_package_schema(self, schema: Schema) -> Schema:
+        schema.update({
+            'resource_report_id': [tk.get_validator('ignore_missing'),
+                            tk.get_converter('convert_to_extras')]
+        })
+        return schema
 
-class ReportviewPlugin(plugins.SingletonPlugin):
-    plugins.implements(plugins.IConfigurer)
-    
-    # plugins.implements(plugins.IAuthFunctions)
-    # plugins.implements(plugins.IActions)
-    # plugins.implements(plugins.IBlueprint)
-    # plugins.implements(plugins.IClick)
-    # plugins.implements(plugins.ITemplateHelpers)
-    # plugins.implements(plugins.IValidators)
-    
+    def create_package_schema(self):
+        schema: Schema = super(
+            ReportviewPlugin, self).create_package_schema()
+        schema = self._modify_package_schema(schema)
+        return schema
+
+    def update_package_schema(self):
+        schema: Schema = super(
+            ReportviewPlugin, self).update_package_schema()
+        schema = self._modify_package_schema(schema)
+        return schema
+    def show_package_schema(self) -> Schema:
+        schema: Schema = super(
+            ReportviewPlugin, self).show_package_schema()
+        schema = self._modify_package_schema(schema)
+        return schema
 
     # IConfigurer
 
-    def update_config(self, config_):
-        toolkit.add_template_directory(config_, "templates")
-        toolkit.add_public_directory(config_, "public")
-        toolkit.add_resource("assets", "reportview")
+    def update_config(self, config: CKANConfig):
+        # Add this plugin's templates dir to CKAN's extra_template_paths, so
+        # that CKAN will use this plugin's custom templates.
+        tk.add_template_directory(config, 'templates')
 
     
     # IAuthFunctions
