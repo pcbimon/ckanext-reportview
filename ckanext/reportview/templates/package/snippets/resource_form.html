@@ -2,14 +2,5 @@
 
 {% block basic_fields %}
 {{ super() }}
-<h1>Test Custom Field</h1>
 {{ form.input('custom_resource_text', label=_('Custom Text'), id='field-custom_resource_text', placeholder=_('custom resource text'), value=data.custom_resource_text, error=errors.custom_resource_text, classes=['control-medium']) }}
-{% endblock %}
-{% block custom_fields %}
-  <div class="control-group">
-    <label class="control-label" for="field-custom_resource_text">Custom Resource Text</label>
-    <div class="controls">
-      <input id="field-custom_resource_text" name="custom_resource_text" type="text" value="{{ data.custom_resource_text }}">
-    </div>
-  </div>
 {% endblock %}

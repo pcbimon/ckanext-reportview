@@ -15,6 +15,7 @@ import ckan.plugins.toolkit as tk
 # )
 
 class ReportviewPlugin(p.SingletonPlugin, tk.DefaultDatasetForm):
+    p.implements(p.IConfigurer)
     p.implements(p.IDatasetForm)
     def _modify_package_schema(self, schema: Schema) -> Schema:
         # Add our resource_report_id_text metadata field to the schema
