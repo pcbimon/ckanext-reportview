@@ -1,7 +1,6 @@
 {% ckan_extends %}
 
-    {% block basic_fields %}
-    {{ super() }}
-    {% snippet 'package/snippets/resource_report_id.html' %}
-    {% endblock %}
+{% block basic_fields %}
+{{ super() }}
+{% snippet 'package/snippets/resource_report_id.html' %}
 {% endblock %}
