@@ -1,4 +1,5 @@
 from __future__ import annotations
+from typing import cast
 
 from ckan.common import CKANConfig
 from ckan.types import Schema
@@ -20,6 +21,10 @@ class ReportviewPlugin(p.SingletonPlugin, tk.DefaultDatasetForm):
             'resource_report_id': [tk.get_validator('ignore_missing'),
                             tk.get_converter('convert_to_extras')]
         })
+        # Add our resource_report_id_text metadata field to the schema
+        cast(Schema, schema['resources']).update({
+                'resource_report_id_text' : [ tk.get_validator('ignore_missing') ]
+                })
         return schema
 
     def create_package_schema(self):
