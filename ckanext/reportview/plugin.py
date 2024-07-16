@@ -17,10 +17,6 @@ import ckan.plugins.toolkit as tk
 class ReportviewPlugin(p.SingletonPlugin, tk.DefaultDatasetForm):
     p.implements(p.IDatasetForm)
     def _modify_package_schema(self, schema: Schema) -> Schema:
-        schema.update({
-            'resource_report_id': [tk.get_validator('ignore_missing'),
-                            tk.get_converter('convert_to_extras')]
-        })
         # Add our resource_report_id_text metadata field to the schema
         cast(Schema, schema['resources']).update({
                 'resource_report_id_text' : [ tk.get_validator('ignore_missing') ]
