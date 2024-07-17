@@ -17,6 +17,7 @@ log = logging.getLogger(__name__)
 #     action, auth, validators
 # )
 ignore_empty = p.toolkit.get_validator("ignore_empty")
+unicode_safe = p.toolkit.get_validator('unicode_safe')
 class ReportviewPlugin(p.SingletonPlugin, tk.DefaultDatasetForm,DefaultTranslation):
     p.implements(p.ITranslation)
     p.implements(p.IConfigurer)
@@ -66,10 +67,10 @@ class ReportviewPlugin(p.SingletonPlugin, tk.DefaultDatasetForm,DefaultTranslati
             "name": "report_view",
             "title": p.toolkit._("Dashboard View"),
             "icon": "tachometer",
-            "schema": {"report_id": [ignore_empty]},
-            "iframed": True,
+            "schema": {"report_id": [ignore_empty, unicode_safe]},
+            "iframed": False,
             "always_available": True,
-            "default_title": p.toolkit._("report_view"),
+            "default_title": p.toolkit._("Dashboard View"),
         }
     def can_view(self, data_dict:DataDict) -> bool:
         resource = data_dict.get('resource')
