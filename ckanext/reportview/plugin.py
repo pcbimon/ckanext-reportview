@@ -15,8 +15,8 @@ import ckan.plugins.toolkit as tk
 #     action, auth, validators
 # )
 
-class ReportviewPlugin(p.SingletonPlugin, tk.DefaultDatasetForm,DefaultTranslation):
-    p.implements(p.ITranslation)
+class ReportviewPlugin(p.SingletonPlugin, tk.DefaultDatasetForm):
+    # p.implements(p.ITranslation)
     p.implements(p.IConfigurer)
     p.implements(p.IDatasetForm)
     def _modify_package_schema(self, schema: Schema) -> Schema:
