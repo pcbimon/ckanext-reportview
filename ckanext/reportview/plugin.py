@@ -68,7 +68,7 @@ class ReportviewPlugin(p.SingletonPlugin, tk.DefaultDatasetForm,DefaultTranslati
             "title": p.toolkit._("Dashboard View"),
             "icon": "tachometer",
             "schema": {"report_id": [ignore_empty, unicode_safe]},
-            "iframed": False,
+            "iframed": True,
             "always_available": True,
             "default_title": p.toolkit._("Dashboard View"),
         }
