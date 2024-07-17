@@ -44,9 +44,6 @@ class ReportviewPlugin(p.SingletonPlugin, tk.DefaultDatasetForm,DefaultTranslati
         schema: Schema = super(
             ReportviewPlugin, self).show_package_schema()
         schema = self._modify_package_schema(schema)
-        cast(Schema, schema['resources']).update({
-                'custom_resource_text' : [ tk.get_validator('ignore_missing') ]
-            })
         return schema
     def is_fallback(self):
         # Return True to register this plugin as the default handler for
@@ -82,13 +79,15 @@ class ReportviewPlugin(p.SingletonPlugin, tk.DefaultDatasetForm,DefaultTranslati
                                  data_dict: DataDict) -> dict[str, Any]:
         config = tk.config
         base_url = config.get('ckanext.reportview.baseurl', 'https://default-reportapp-url')
+        # add query params to the base url key reportId
+        base_url = base_url + '?reportId='          
         resource = data_dict.get('resource')
         report_id = ''
         if resource:
-            report_id = resource.get('report_id')
+            report_id = resource.get('resource_report_id_text')
+        base_url = base_url + report_id
         return {
-            'base_url': base_url,
-            'report_id': report_id
+            'report_url': base_url,
         }
     # IAuthFunctions
 
