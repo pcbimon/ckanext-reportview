@@ -76,6 +76,7 @@ class ReportviewPlugin(p.SingletonPlugin, tk.DefaultDatasetForm,DefaultTranslati
         report_id = ''
         if resource:
             report_id = resource.get('resource_report_id_text')
+            log.info(f"report_id: {report_id}")
             # check if report_id is not empty
             if report_id == '':
                 return False
