@@ -72,7 +72,15 @@ class ReportviewPlugin(p.SingletonPlugin, tk.DefaultDatasetForm,DefaultTranslati
             "default_title": p.toolkit._("report_view"),
         }
     def can_view(self, data_dict:DataDict) -> bool:
-        return True
+        resource = data_dict.get('resource')
+        report_id = ''
+        if resource:
+            report_id = resource.get('resource_report_id_text')
+            # check if report_id is not empty
+            if report_id == '':
+                return False
+            return True
+        return False
     def view_template(self, context: Context, data_dict: DataDict) -> str:
         return 'report_iframe.html'
     def setup_template_variables(self, context: Context,
