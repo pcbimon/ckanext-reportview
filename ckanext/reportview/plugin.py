@@ -2,7 +2,6 @@ from __future__ import annotations
 from typing import Any, cast
 
 from ckan.common import CKANConfig
-from ckan.lib.navl.validators import ignore_empty
 from ckan.lib.plugins import DefaultTranslation
 from ckan.types import Context, DataDict, Schema
 import ckan.plugins as p
@@ -17,7 +16,7 @@ log = logging.getLogger(__name__)
 # from ckanext.reportview.logic import (
 #     action, auth, validators
 # )
-
+ignore_empty = p.toolkit.get_validator("ignore_empty")
 class ReportviewPlugin(p.SingletonPlugin, tk.DefaultDatasetForm,DefaultTranslation):
     p.implements(p.ITranslation)
     p.implements(p.IConfigurer)
