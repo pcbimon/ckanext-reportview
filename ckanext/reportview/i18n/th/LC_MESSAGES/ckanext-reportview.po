@@ -25,5 +25,5 @@ msgstr "Dashboard"
 
 #: ckanext/reportview/templates/package/snippets/resource_form.html:5
 msgid "input report id"
-msgstr "กรุณากรอกรหัสของ Dashbaord"
+msgstr "กรุณากรอกรหัสของ Dashboard"
 
