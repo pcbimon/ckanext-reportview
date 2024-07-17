@@ -84,7 +84,9 @@ class ReportviewPlugin(p.SingletonPlugin, tk.DefaultDatasetForm,DefaultTranslati
         config = tk.config
         base_url = config.get('ckanext.reportview.baseurl', 'https://default-reportapp-url')
         resource = data_dict.get('resource')
-        report_id = resource.get('report_id','') # type: ignore
+        report_id = ''
+        if resource:
+            report_id = resource.get('report_id')
         return {
             'base_url': base_url,
             'report_id': report_id
