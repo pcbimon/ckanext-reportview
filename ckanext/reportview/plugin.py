@@ -1,11 +1,14 @@
 from __future__ import annotations
-from typing import cast
+from typing import Any, cast
 
 from ckan.common import CKANConfig
+from ckan.lib.navl.validators import ignore_empty
 from ckan.lib.plugins import DefaultTranslation
-from ckan.types import Schema
+from ckan.types import Context, DataDict, Schema
 import ckan.plugins as p
 import ckan.plugins.toolkit as tk
+import logging
+log = logging.getLogger(__name__)
 
 
 # import ckanext.reportview.cli as cli
@@ -19,6 +22,7 @@ class ReportviewPlugin(p.SingletonPlugin, tk.DefaultDatasetForm,DefaultTranslati
     p.implements(p.ITranslation)
     p.implements(p.IConfigurer)
     p.implements(p.IDatasetForm)
+    p.implements(p.IResourceView, inherit=True)
     def _modify_package_schema(self, schema: Schema) -> Schema:
         # Add our resource_report_id_text metadata field to the schema
         cast(Schema, schema['resources']).update({
@@ -60,8 +64,31 @@ class ReportviewPlugin(p.SingletonPlugin, tk.DefaultDatasetForm,DefaultTranslati
         # Add this plugin's templates dir to CKAN's extra_template_paths, so
         # that CKAN will use this plugin's custom templates.
         tk.add_template_directory(config, 'templates')
-
-    
+    # IResourceView
+    def info(self)-> dict[str, Any]:
+        return {
+            "name": "report_view",
+            "title": p.toolkit._("report_view"),
+            "icon": "fa-tachometer",
+            "schema": {"report_id": [ignore_empty]},
+            "iframed": True,
+            "always_available": True,
+            "default_title": p.toolkit._("report_view"),
+        }
+    def can_view(self, data_dict:DataDict) -> bool:
+        return True
+    def view_template(self, context: Context, data_dict: DataDict) -> str:
+        return 'report_iframe.html'
+    def setup_template_variables(self, context: Context,
+                                 data_dict: DataDict) -> dict[str, Any]:
+        config = tk.config
+        base_url = config.get('ckanext.reportview.baseurl', 'https://default-reportapp-url')
+        resource = data_dict.get('resource')
+        report_id = resource.get('report_id','') # type: ignore
+        return {
+            'base_url': base_url,
+            'report_id': report_id
+        }
     # IAuthFunctions
 
     # def get_auth_functions(self):
