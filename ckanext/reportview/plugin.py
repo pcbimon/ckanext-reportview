@@ -2,6 +2,7 @@ from __future__ import annotations
 from typing import cast
 
 from ckan.common import CKANConfig
+from ckan.lib.plugins import DefaultTranslation
 from ckan.types import Schema
 import ckan.plugins as p
 import ckan.plugins.toolkit as tk
@@ -14,8 +15,8 @@ import ckan.plugins.toolkit as tk
 #     action, auth, validators
 # )
 
-class ReportviewPlugin(p.SingletonPlugin, tk.DefaultDatasetForm):
-    p.implements(p.ITranslation,inherit=True)
+class ReportviewPlugin(p.SingletonPlugin, tk.DefaultDatasetForm,DefaultTranslation):
+    p.implements(p.ITranslation)
     p.implements(p.IConfigurer)
     p.implements(p.IDatasetForm)
     def _modify_package_schema(self, schema: Schema) -> Schema:
