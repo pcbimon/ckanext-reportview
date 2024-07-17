@@ -67,8 +67,8 @@ class ReportviewPlugin(p.SingletonPlugin, tk.DefaultDatasetForm,DefaultTranslati
     def info(self)-> dict[str, Any]:
         return {
             "name": "report_view",
-            "title": p.toolkit._("report_view"),
-            "icon": "fa-tachometer",
+            "title": p.toolkit._("Dashboard View"),
+            "icon": "tachometer",
             "schema": {"report_id": [ignore_empty]},
             "iframed": True,
             "always_available": True,
